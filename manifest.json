@@ -1,5 +1,16 @@
 {
     "name":"GReader",
     "version":"1.0",
-    "description":"Enhanced Google Reader experience"
+    "description":"Enhanced Google Reader experience",
+    "content_scripts":[{
+        "matches":[
+            "http://www.google.com/reader/view/*"
+        ],
+        "css":["css/greader.css"],
+        "js":[
+            "lib/jquery-1.6.4.min.js",
+            "src/greader.js"
+        ],
+        "run_at":"document_idle"
+    }]
 }
