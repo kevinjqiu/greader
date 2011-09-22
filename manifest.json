@@ -4,7 +4,7 @@
     "description":"Enhanced Google Reader experience",
     "content_scripts":[{
         "matches":[
-            "http://www.google.com/reader/view/*"
+            "*://www.google.com/reader/view/*"
         ],
         "css":["css/greader.css"],
         "js":[

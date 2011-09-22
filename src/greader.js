@@ -1,7 +1,9 @@
 (function($) {
-    $(document).ready(function() {
-        var entry_actions = $(".entry-actions");
-        console.log(entry_actions);
-        entry_actions.append($("<span>").addClass("link unselectable").text("Twitter"));
+    $("#entries").live('DOMNodeInserted', function(e) {
+        if (!e.target.className.match(/entry\-actions/))
+            return;
+
+        var target = $(e.target);
+        target.append($("<span>").addClass("link unselectable").text("Twitter"));
     });
 })(jQuery);
