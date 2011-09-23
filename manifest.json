@@ -2,6 +2,9 @@
     "name":"GReader",
     "version":"1.0",
     "description":"Enhanced Google Reader experience",
+    "permissions": [
+        "http://*.dzone.com/"
+    ],
     "content_scripts":[{
         "matches":[
             "*://www.google.com/reader/view/*"

@@ -27,9 +27,12 @@
 
         var entryAction = new EntryAction($(e.target));
         entryAction.addAction({
-            'name':'Twitter', 
+            'name':'Click Through', 
             'fn':function(entry) {
-                alert(entry.url);
+                var dummy = $(document.body).append($("<div>").attr("id", "__dummy__"));
+                dummy.load(entry.url, null, function(responseText, textStatus, xhr) {
+                    alert('complete');
+                });
             }
         });
 
