@@ -29,9 +29,10 @@
         entryAction.addAction({
             'name':'Click Through', 
             'fn':function(entry) {
-                var dummy = $(document.body).append($("<div>").attr("id", "__dummy__"));
-                dummy.load(entry.url, null, function(responseText, textStatus, xhr) {
-                    alert('complete');
+                chrome.extension.sendRequest(entry, function(response) {
+                    var matched = /<div class="ldTitle">(.*?)<\/div>/(response.data);
+                    var href = ($(matched[1]).attr("href"));
+                    alert(href);
                 });
             }
         });

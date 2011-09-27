@@ -5,6 +5,7 @@
     "permissions": [
         "http://*.dzone.com/"
     ],
+    "background_page":"background.html",
     "content_scripts":[{
         "matches":[
             "*://www.google.com/reader/view/*"

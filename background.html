@@ -1,0 +1,14 @@
+<html>
+<script type="text/javascript" src="lib/jquery-1.6.4.min.js"></script>
+<script>
+    (function($) {
+        chrome.extension.onRequest.addListener(
+            function(request, sender, sendResponse) {
+                $.get(request.url, function(data) {
+                    sendResponse({"data":data});
+                });
+            }
+        );
+    })(jQuery);
+</script>
+</html>
