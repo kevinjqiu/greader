@@ -29,10 +29,15 @@
         entryAction.addAction({
             'name':'Click Through', 
             'fn':function(entry) {
-                chrome.extension.sendRequest(entry, function(response) {
+                chrome.extension.sendRequest({"type":"fetch_entry", "url":entry.url}, function(response) {
                     var matched = /<div class="ldTitle">(.*?)<\/div>/(response.data);
                     var href = ($(matched[1]).attr("href"));
                     alert(href);
+                    if (href !== null) {
+                        chrome.extension.sendRequest({"type":"open_tab", "url":href}, function(response) {
+                            // display a toaster?
+                        });
+                    }
                 });
             }
         });
