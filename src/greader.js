@@ -26,20 +26,22 @@
             return;
 
         var entryAction = new EntryAction($(e.target));
-        entryAction.addAction({
-            'name':'Click Through', 
-            'fn':function(entry) {
-                chrome.extension.sendRequest({"type":"fetch_entry", "url":entry.url}, function(response) {
-                    var matched = /<div class="ldTitle">(.*?)<\/div>/(response.data);
-                    var href = ($(matched[1]).attr("href"));
-                    if (href !== null) {
-                        chrome.extension.sendRequest({"type":"open_tab", "url":href}, function(response) {
-                            // TODO: do something afterwards?
-                        });
-                    }
-                });
-            }
-        });
+        if (entryAction.entry.url.match(/^http\:\/\/feeds\.dzone\.com/)) {
+            entryAction.addAction({
+                'name':'Click Through',
+                'fn':function(entry) {
+                    chrome.extension.sendRequest({"type":"fetch_entry", "url":entry.url}, function(response) {
+                        var matched = /<div class="ldTitle">(.*?)<\/div>/(response.data);
+                        var href = ($(matched[1]).attr("href"));
+                        if (href !== null) {
+                            chrome.extension.sendRequest({"type":"open_tab", "url":href}, function(response) {
+                                // TODO: do something afterwards?
+                            });
+                        }
+                    });
+                }
+            });
+        }
 
     });
 })(jQuery);
