@@ -1,7 +1,20 @@
 <html>
 <script type="text/javascript" src="lib/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="lib/chromium/chrome_ex_oauthsimple.js"></script>
+<script type="text/javascript" src="lib/chromium/chrome_ex_oauth.js"></script>
 <script>
     (function($) {
+        var CONSUMER_KEY = 'anonymous';
+        var CONSUMER_SECRET = 'anonymous';
+
+        var twitter_oauth = ChromeExOAuth.initBackgroundPage({
+            'request_url':'https://api.twitter.com/oauth/request_token',
+            'authorize_url':'https://api.twitter.com/oauth/authorize',
+            'access_url':'https://api.twitter.com/oauth/access_token',
+            'consumer_key':CONSUMER_KEY,
+            'consumer_secret':CONSUMER_SECRET
+        });
+
         chrome.extension.onRequest.addListener(
             function(request, sender, sendResponse) {
                 if (request.type === 'fetch_entry') {
