@@ -3,7 +3,9 @@
     "version":"1.0",
     "description":"Enhanced Google Reader experience",
     "permissions": [
-        "http://*.dzone.com/"
+        "tabs",
+        "http://*.dzone.com/",
+        "https://api.twitter.com/"
     ],
     "background_page":"background.html",
     "content_scripts":[{
