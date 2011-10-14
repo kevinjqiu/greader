@@ -21,26 +21,32 @@
             .click(onclick));
     };
 
+    var clickThroughAction = {
+        'name':'Click Through',
+        'fn':function(entry) {
+            chrome.extension.sendRequest({"type":"fetch_entry", "url":entry.url}, function(response) {
+                var matched = /<div class="ldTitle">(.*?)<\/div>/.exec(response.data);
+                if (matched) {
+                    var href = ($(matched[1]).attr("href"));
+                    if (href !== null) {
+                        chrome.extension.sendRequest({"type":"open_tab", "url":href}, function(response) {
+                            // TODO: do something afterwards?
+                        });
+                    }
+                } else {
+                    console.error("DZone matcher no longer works.");
+                }
+            });
+        }
+    };
+
     $("#entries").live('DOMNodeInserted', function(e) {
         if (!e.target.className.match(/entry\-actions/))
             return;
 
         var entryAction = new EntryAction($(e.target));
         if (entryAction.entry.url.match(/^http\:\/\/feeds\.dzone\.com/)) {
-            entryAction.addAction({
-                'name':'Click Through',
-                'fn':function(entry) {
-                    chrome.extension.sendRequest({"type":"fetch_entry", "url":entry.url}, function(response) {
-                        var matched = /<div class="ldTitle">(.*?)<\/div>/.exec(response.data);
-                        var href = ($(matched[1]).attr("href"));
-                        if (href !== null) {
-                            chrome.extension.sendRequest({"type":"open_tab", "url":href}, function(response) {
-                                // TODO: do something afterwards?
-                            });
-                        }
-                    });
-                }
-            });
+            entryAction.addAction(clickThroughAction);
         }
 
     });
