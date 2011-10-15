@@ -19,7 +19,7 @@
             .addClass("link unselectable")
             .addClass(action['icon_class'])
             .text(action['caption'])
-            .click(onclick)).append($("wbr"));
+            .click(onclick));
     };
 
     var clickThroughAction = {
