@@ -30,7 +30,7 @@
                     var href = ($(matched[1]).attr("href"));
                     if (href !== null) {
                         chrome.extension.sendRequest({"type":"open_tab", "url":href}, function(response) {
-                            // TODO: do something afterwards?
+                            console.info(href + " opened");
                         });
                     }
                 } else {
