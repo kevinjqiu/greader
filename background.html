@@ -1,23 +1,7 @@
 <html>
-<script type="text/javascript" src="lib/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="third_party/jquery-1.6.4.min.js"></script>
 <script type="text/javascript" src="src/secrets.js"></script>
 <!-- <script type="text/javascript" src="/third_party/chromium/chrome_ex_oauthsimple.js"></script> -->
 <!-- <script type="text/javascript" src="/third_party/chromium/chrome_ex_oauth.js"></script> -->
-<script>
-    (function($) {
-        chrome.extension.onRequest.addListener(
-            function(request, sender, sendResponse) {
-                if (request.type === 'fetch_entry') {
-                    $.get(request.url, function(data) {
-                        sendResponse({"data":data});
-                    });
-                } else if (request.type === 'open_tab') {
-                    chrome.tabs.create({'url':request.url});
-                    sendResponse({"status":"ok"});
-                }
-            }
-        );
-
-    })(jQuery);
-</script>
+<script type="text/javascript" src="src/background.js"></script>
 </html>

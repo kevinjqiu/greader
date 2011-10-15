@@ -17,12 +17,14 @@
 
         this.element.append($("<span>")
             .addClass("link unselectable")
-            .text(action['name'])
-            .click(onclick));
+            .addClass(action['icon_class'])
+            .text(action['caption'])
+            .click(onclick)).append($("wbr"));
     };
 
     var clickThroughAction = {
-        'name':'Click Through',
+        'name':'click_through',
+        'caption':'Click Through',
         'fn':function(entry) {
             chrome.extension.sendRequest({"type":"fetch_entry", "url":entry.url}, function(response) {
                 var matched = /<div class="ldTitle">(.*?)<\/div>/.exec(response.data);
@@ -40,6 +42,15 @@
         }
     };
 
+    var twitterThisAction = {
+        'name':'twitter',
+        'caption':'Twitter!',
+        'fn':function(entry) {
+            // start oauth dance
+            alert('foo');
+        }
+    };
+
     $("#entries").live('DOMNodeInserted', function(e) {
         if (!e.target.className.match(/entry\-actions/))
             return;
@@ -48,6 +59,6 @@
         if (entryAction.entry.url.match(/^http\:\/\/feeds\.dzone\.com/)) {
             entryAction.addAction(clickThroughAction);
         }
-
+        entryAction.addAction(twitterThisAction);
     });
 })(jQuery);
