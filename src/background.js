@@ -1,3 +1,4 @@
+
 (function($) {
     chrome.extension.onRequest.addListener(
         function(request, sender, sendResponse) {
@@ -18,7 +19,6 @@
       'access_url': 'https://api.twitter.com/oauth/access_token',
       'consumer_key': TwitterSecrets.consumer_key,
       'consumer_secret': TwitterSecrets.consumer_secret,
-      'scope': 'oob',
       'app_name': 'greader-plugin'
     });
 

@@ -9,10 +9,10 @@
     };
 
     EntryAction.prototype.addAction = function(action) {
-        var that = this;
+        var _this = this;
         var onclick = function(e) {
             var actionFunc = action['fn'];
-            actionFunc(that.entry);
+            actionFunc(_this.entry);
         }
 
         this.element.append($("<span>")
