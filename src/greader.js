@@ -46,8 +46,9 @@
         'name':'twitter',
         'caption':'Twitter!',
         'fn':function(entry) {
-            // start oauth dance
-            alert('foo');
+            chrome.extension.sendRequest({"type":"twitter", "url":entry.url}, function(response) {
+                console.log('twittered');
+            });
         }
     };
 
